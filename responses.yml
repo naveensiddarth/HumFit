@@ -18,7 +18,7 @@ responses:
   Hi! Welcome to HumFit, your Guide to Healthy Living.
   To start, Please select the type of information you want to see.
   
-  utter_ask_cuisine:
+ utter_ask_cuisine:
     buttons:
     - payload: Continental
       title: Continental
