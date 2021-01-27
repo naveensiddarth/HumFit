@@ -1,0 +1,9 @@
+version: "2.0"
+nlu:
+- lookup: course
+  examples: |
+  - Breakfast
+  - Lunch
+  - Dinner
+  - Snacks
+  - Dessert
