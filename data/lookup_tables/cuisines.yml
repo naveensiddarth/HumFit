@@ -1,7 +1,7 @@
 version: "2.0"
 nlu:
 - lookup: cuisine
-  examples:
+  examples: |
   - Continental
   - North Indian
   - Meditteranean
