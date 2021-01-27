@@ -1,23 +1,32 @@
 version: '2.0'
-config:
-  store_entities_as_slots: true
 session_config:
   session_expiration_time: 0
   carry_over_slots_to_new_session: true
+
 intents:
-- greet:
-    use_entities: true
-- inform:
-    use_entities: true
-- subscribe:
-    use_entities: true
-entities: []
+- greet
+- confirm_recipes
+- confirm_exercises
+- telling_cuisine
+- telling_type
+- telling_course
+
+entities:
+- cuisine
+- type
+- course
+
 slots:
-  email:
-    type: rasa.shared.core.slots.UnfeaturizedSlot
-    initial_value: null
-    auto_fill: true
-    influence_conversation: false
+ cuisine:
+  type: text
+  auto_fill: false
+ course:
+  type: text
+  auto_fill: false
+ type:
+  type: text
+  auto_fill: false
+
 responses:
  utter_greet_ask_re:
   buttons:
@@ -80,3 +89,17 @@ responses:
    - payload: Dessert
      title: Dessert
    text: Please select your preferred course.
+   
+   actions:
+   - action_bot_greet
+   - utter_greet_ask_re
+   - utter_ask_cuisine
+   - utter_ask_type
+   - utter_ask_course
+   - action_show_exercises
+   - action_show_recipes
+   - utter_submit
+   
+   form:
+   - recipe_form
+   - exercise_form
