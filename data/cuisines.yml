@@ -1,0 +1,13 @@
+version: "2.0"
+nlu:
+- lookup: cuisine
+  examples:
+  - Continental
+  - North Indian
+  - Meditteranean
+  - Italian
+  - South Indian
+  - Asian
+  - Thai
+  - Chinese 
+  - American
