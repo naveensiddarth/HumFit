@@ -17,12 +17,23 @@ from rasa_sdk.forms import FormAction
 class RecipeForm(FormAction):
 
      def name(self) -> Text:
-#         return ""
-#
-#     def run(self, dispatcher: CollectingDispatcher,
-#             tracker: Tracker,
-#             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-#
-#         dispatcher.utter_message(text="Hello World!")
-#
-#         return []
+         return "recipe_form"
+
+     @staticmethod
+     def required_slots(tracker: Tracker) -> List[Text]:
+          
+          return["cuisine","type","course"]
+     
+     def slot_mappings(self) -> Dict[Text, Union[Dict, List[Dict]]]:
+          return {
+               "cuisine": [
+                    self.from_entity(entity="cuisine", intent=["telling_cuisine"]),
+               ],
+               "type": [
+                    self.from_entity(entity="type", intent=["telling_type"]),
+               ],
+               "course": [
+                    self.from_entity(entity="course", intent=["telling_course"]),
+               ],
+          }
+     
