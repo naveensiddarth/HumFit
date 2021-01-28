@@ -1,12 +1,12 @@
 nlu:
 ## intent: greet
-    - Hi
-    - Hey!
-    - Hello
-    - Good day
-    - Good morning
-    - Good afternoon
-    - Good evening
+  - Hi
+  - Hey!
+  - Hello
+  - Good day
+  - Good morning
+  - Good afternoon
+  - Good evening
 
 ## intent: confirm_recipes
   - Recipes
@@ -18,7 +18,6 @@ nlu:
   - [Italian](cuisine)
   
 ## intent: telling_type
-  examples: |
   - [Vegetarian](type)
 
 ## intent: telling_course
