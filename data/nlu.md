@@ -1,4 +1,3 @@
-nlu:
 ## intent: greet
   - Hi
   - Hey!
