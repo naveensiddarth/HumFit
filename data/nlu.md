@@ -28,3 +28,5 @@ nlu:
 - intent: telling_course
   examples: |
   - [Italian](course)
+
+lookup: cuisines.txt
