@@ -4,36 +4,53 @@
 # See this guide on how to implement these action:
 # https://rasa.com/docs/rasa/custom-actions
 
-
-
 from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 import requests
-import ast
-from rasa_sdk.events import SlotSet
-from rasa_sdk.forms import FormAction
 
-class RecipeForm(FormAction):
+class ActionShowRecipes(Action):
 
-     def name(self) -> Text:
-         return "recipe_form"
+    def name(self) -> Text:
+        return "action_show_recipes"
 
-     @staticmethod
-     def required_slots(tracker: Tracker) -> List[Text]:
-          
-          return["cuisine","type","course"]
-     
-     def slot_mappings(self) -> Dict[Text, Union[Dict, List[Dict]]]:
-          return {
-               "cuisine": [
-                    self.from_entity(entity="cuisine", intent=["telling_cuisine"]),
-               ],
-               "type": [
-                    self.from_entity(entity="type", intent=["telling_type"]),
-               ],
-               "course": [
-                    self.from_entity(entity="course", intent=["telling_course"]),
-               ],
-          }
-     
+    def  run(self, dispatcher: CollectingDispatcher,
+             tracker: Tracker,
+             domain: Dict[Text,Any]) -> List[Dict[Text,Any]]:
+        response = requests.get().json()
+        entities = tracker.latest_message['entities']
+        cuisine = None
+        type = None
+        course = None
+        for e in entities:
+            if e['entity'] == "cuisine":
+                cuisine = e['value']
+            if e['entity'] == "type":
+                type = e['value']
+            if e['entity'] == "course":
+                course = e['value']
+       for data in response["Recipes"]:
+           if data["Cuisine"] ==  cuisine.title() && data["Type"] == type.title() && data["Course"] == course.title():
+               print(data)
+               message =  data["Name"] + data["PrepTime"] + data["TotalTime"] + data["Calories"] + data["Instructions"]
+               dispatcher.utter_message(message)
+
+class ActionShowExercices(Action):
+
+    def name(self) -> Text:
+        return "action_show_exercises"
+
+    def  run(self, dispatcher: CollectingDispatcher,
+             tracker: Tracker,
+             domain: Dict[Text,Any]) -> List[Dict[Text,Any]]:
+        response = requests.get().json()
+        entities = tracker.latest_message['entities']
+        muscle = None
+        for e in entities:
+            if e['entity'] == "muscle":
+                muscle = e['value']
+       for data in response["Exercises"]:
+           if  data["Muscle"] == muscle.title():
+               print(data)
+               message =  data["Name"] + data["Muscle"] + data["SecondaryMuscle"] + data["Instructions"]
+               dispatcher.utter_message(message)
