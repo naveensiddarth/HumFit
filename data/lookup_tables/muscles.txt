@@ -1,0 +1,12 @@
+version: "2.0"
+nlu:
+- lookup: muscles
+  examples: |
+  - Abs
+  - Biceps
+  - Calves
+  - Chest
+  - Shoulders
+  - Hamstrings
+  - Back
+  - Triceps
