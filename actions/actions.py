@@ -43,14 +43,14 @@ class ActionShowExercices(Action):
     def  run(self, dispatcher: CollectingDispatcher,
              tracker: Tracker,
              domain: Dict[Text,Any]) -> List[Dict[Text,Any]]:
-        response = requests.get().json()
+        response = requests.get(https://sheetdb.io/api/v1/nnii98j8gb6ji).json()
         entities = tracker.latest_message['entities']
         muscle = None
         for e in entities:
-            if e['entity'] == "muscle":
+            if e['entity'] == "Primary Muscle":
                 muscle = e['value']
        for data in response["Exercises"]:
            if  data["Muscle"] == muscle.title():
                print(data)
-               message =  data["Name"] + data["Muscle"] + data["SecondaryMuscle"] + data["Instructions"]
+               message =  data["Name"] + data["Primary Muscle"] + data["Secondary Muscle"] + data["Instructions"]
                dispatcher.utter_message(message)
